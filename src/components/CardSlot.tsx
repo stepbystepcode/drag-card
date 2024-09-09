@@ -3,8 +3,8 @@ import { useDrop } from 'react-dnd';
 import Card from './Card';
 
 interface CardSlotProps {
-  cards: { id: number; number: number }[];
-  onDrop: (id: number, number: number, slotIndex: number) => void;
+  cards: { id: number; content: string }[];  // 修改 number 为 content (string)
+  onDrop: (id: number, content: string, slotIndex: number) => void;  // 修改 number 为 content
   onReturn: (id: number) => void;
   slotIndex: number;
 }
@@ -12,9 +12,9 @@ interface CardSlotProps {
 const CardSlot: React.FC<CardSlotProps> = ({ cards, onDrop, onReturn, slotIndex }) => {
   const [{ isOver }, dropRef] = useDrop({
     accept: 'CARD',
-    drop: (item: { id: number; number: number }) => {
+    drop: (item: { id: number; content: string }) => {  // 修改 number 为 content
       if (!cards.some((card) => card.id === item.id)) {
-        onDrop(item.id, item.number, slotIndex);
+        onDrop(item.id, item.content, slotIndex);  // 修改 number 为 content
       }
     },
     collect: (monitor) => ({
@@ -36,7 +36,7 @@ const CardSlot: React.FC<CardSlotProps> = ({ cards, onDrop, onReturn, slotIndex 
             zIndex: index,
           }}
         >
-          <Card id={card.id} number={card.number} onReturn={onReturn} />
+          <Card id={card.id} content={card.content} onReturn={onReturn} />  {/* 修改 number 为 content */}
         </div>
       ))}
     </div>

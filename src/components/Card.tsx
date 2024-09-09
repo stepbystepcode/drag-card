@@ -3,14 +3,14 @@ import { useDrag } from 'react-dnd';
 
 interface CardProps {
   id: number;
-  number: number;
+  content: string;
   onReturn: (id: number) => void;
 }
 
-const Card: React.FC<CardProps> = ({ id, number, onReturn }) => {
+const Card: React.FC<CardProps> = ({ id, content, onReturn }) => {
   const [{ isDragging }, dragRef] = useDrag({
     type: 'CARD',
-    item: { id, number },
+    item: { id, content },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
@@ -19,10 +19,12 @@ const Card: React.FC<CardProps> = ({ id, number, onReturn }) => {
   return (
     <div
       ref={dragRef}
-      className={`w-14 h-20 m-2 text-center border rounded bg-white ${isDragging ? 'opacity-50' : 'opacity-100'}`}
+      className={`w-36 h-24 m-2 flex items-center text-sm border rounded bg-white ${isDragging ? 'opacity-50' : 'opacity-100'}`}
       onClick={() => onReturn(id)}
     >
-      {number}
+      <div className="bg-[#aee636] text-white py-1 pl-6 pr-2">
+        {content}
+      </div>
     </div>
   );
 };
