@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { cn } from './lib/utils';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import CardSlot from './components/CardSlot';
@@ -53,10 +54,13 @@ const App: React.FC = () => {
     <DndProvider backend={HTML5Backend}>
       <div className="flex flex-col items-center space-y-4">
         {/* 显示的卡槽 */}
-        <div className={`gap-4 w-full grid-cols-${5-hiddenSlots.length} ${5-hiddenSlots.length > 2 ? 'grid' : 'flex'}`}>
+        <div className={cn(
+          'gap-4 w-full grid',
+          5 - hiddenSlots.length > 2 ? `grid-cols-${5 - hiddenSlots.length}` : 'flex',
+        )}>
           {slots.map((slot, index) => (
               <div key={index} className={`flex flex-col items-center w-full ${hiddenSlots.includes(index) ? 'hidden' : ''}`}>
-                <button className="my-2 font-bold text-xl" onClick={() => setHiddenSlots([...hiddenSlots, index])}>
+                <button className="my-2 font-bold text-[2em]" onClick={() => setHiddenSlots([...hiddenSlots, index])}>
                   {slotLabels[index]}
                 </button>
                 
@@ -73,7 +77,6 @@ const App: React.FC = () => {
         {/* 底部卡片列表 */}
         <CardList cards={cards} onReturn={handleReturn} />
         {/* 隐藏的卡槽标签 */}
-        {hiddenSlots.length > 0 && (
           <div className="fixed bottom-0 left-0 w-full p-2">
             <div className="flex space-x-4">
               {hiddenSlots.map((slotIndex) => (
@@ -86,8 +89,8 @@ const App: React.FC = () => {
                 </button>
               ))}
             </div>
-          </div>
-        )}
+        </div>
+
       </div>
     </DndProvider>
   );

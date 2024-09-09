@@ -20,13 +20,13 @@ const Card: React.FC<CardProps> = ({ id, content, description, onReturn }) => {
   return (
     <div
       ref={dragRef}
-      className={`relative w-36 h-24 m-2 flex items-center text-sm border rounded bg-white ${isDragging ? 'opacity-50' : 'opacity-100'}`}
+      className={`relative w-full max-w-[300px] aspect-[3/2] m-2 flex items-center text-sm border rounded bg-white ${isDragging ? 'opacity-50' : 'opacity-100'}`}
       onClick={() => onReturn(id)}
     >
-      <div className="bg-[#aee636] text-white py-1 pl-6 pr-2">
+      <div className="bg-[#aee636] text-white py-1 pl-6 pr-2 text-lg">
         {content}
       </div>
-      <div className="absolute bottom-1 text-[6px] leading-3 text-center p-1 text-gray-500 w-full">{description}</div>
+      <div className="absolute bottom-1 text-sm text-center p-1 text-gray-500 w-full">{description}</div>
     </div>
   );
 };
