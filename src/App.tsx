@@ -9,13 +9,15 @@ import { data } from './Data'; // 从同级文件夹的 Data.ts 中导入卡片�
 interface CardType {
   id: number;
   content: string;
+  description: string;
 }
 
 const App: React.FC = () => {
   // 使用 Data.ts 中的数据来初始化卡片
-  const initialCards: CardType[] = data.map((item, index) => ({
+  const initialCards: CardType[] = data.map((item: { name: string, description: string }, index: number) => ({
     id: index,
-    content: item,
+    content: item.name,
+    description: item.description,
   }));
 
   const [cards, setCards] = useState<CardType[]>(initialCards);
@@ -25,10 +27,10 @@ const App: React.FC = () => {
   // 卡槽名称
   const slotLabels = ['非常重视', '比较重视', '有时重视', '很少重视', '完全不重视'];
 
-  const handleDrop = (id: number, content: string, targetSlotIndex: number) => {
+  const handleDrop = (id: number, content: string, description: string, targetSlotIndex: number) => {
     setSlots((prevSlots) => {
       const newSlots = prevSlots.map((slot) => slot.filter((card) => card.id !== id)); // 从所有牌槽中删除该卡片
-      newSlots[targetSlotIndex] = [...newSlots[targetSlotIndex], { id, content }]; // 将卡片添加到目标牌槽
+      newSlots[targetSlotIndex] = [...newSlots[targetSlotIndex], { id, content, description }]; // 将卡片添加到目标牌槽
       return newSlots;
     });
     setCards((prevCards) => prevCards.filter((card) => card.id !== id)); // 从底部区域删除卡片

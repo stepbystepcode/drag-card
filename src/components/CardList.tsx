@@ -2,7 +2,7 @@ import React from 'react';
 import Card from './Card';
 
 interface CardListProps {
-  cards: { id: number; content: string }[];
+  cards: { id: number; content: string, description: string }[];
   onReturn: (id: number) => void;
 }
 
@@ -13,7 +13,7 @@ const CardList: React.FC<CardListProps> = ({ cards, onReturn }) => {
   return (
     <div className="p-4 border border-dashed flex justify-center items-center fixed bottom-0 right-0">
       {topCard ? (
-        <Card key={topCard.id} id={topCard.id} content={topCard.content} onReturn={onReturn} />
+        <Card key={topCard.id} id={topCard.id} content={topCard.content} description={topCard.description} onReturn={onReturn} />
       ) : (
         <p>无</p>
       )}
