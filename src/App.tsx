@@ -3,7 +3,7 @@ import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import CardSlot from './components/CardSlot';
 import CardList from './components/CardList';
-import { data } from './Data'; // 从同级文件夹的 Data.ts 中导入卡片数据
+import { data } from './Data';
 
 // 定义卡片类型
 interface CardType {
@@ -13,7 +13,6 @@ interface CardType {
 }
 
 const App: React.FC = () => {
-  // 使用 Data.ts 中的数据来初始化卡片
   const initialCards: CardType[] = data.map((item: { name: string, description: string }, index: number) => ({
     id: index,
     content: item.name,
@@ -87,12 +86,11 @@ const App: React.FC = () => {
 
         {/* 隐藏的卡槽标签 */}
         {hiddenSlots.length > 0 && (
-          <div className="mt-4 p-2 border">
-            <h3 className="font-bold mb-2">隐藏的卡槽:</h3>
+          <div className="fixed bottom-0 left-0 w-full p-2">
             <div className="flex space-x-4">
               {hiddenSlots.map((slotIndex) => (
-                <button key={slotIndex} className="font-bold" onClick={() => restoreSlot(slotIndex)}>
-                  {slotLabels[slotIndex]} {/* 点击恢复显示 */}
+                <button key={slotIndex} className="w-36 h-24 m-2 flex items-center justify-center text-md border text-white rounded bg-[#aee636]" onClick={() => restoreSlot(slotIndex)}>
+                  {slotLabels[slotIndex]}
                 </button>
               ))}
             </div>

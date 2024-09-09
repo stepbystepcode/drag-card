@@ -25,7 +25,7 @@ const CardSlot: React.FC<CardSlotProps> = ({ cards, onDrop, onReturn, slotIndex 
   return (
     <div
       ref={dropRef}
-      className={`flex flex-col justify-start items-center w-40 h-full p-4 border border-dashed ${isOver ? 'bg-blue-100' : ''}`}
+      className={`flex flex-col justify-start items-center w-40 h-[calc(100vh-12rem)] p-4 border border-dashed ${isOver ? 'bg-blue-100' : 'bg-[#fafafa]'}`}
     >
       {cards.map((card) => (
         <div
