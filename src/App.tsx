@@ -49,27 +49,17 @@ const App: React.FC = () => {
     );
   };
 
-  // 隐藏卡槽
-  const hideSlot = (index: number) => {
-    setHiddenSlots((prev) => [...prev, index]);
-  };
-
-  // 恢复显示卡槽
-  const restoreSlot = (index: number) => {
-    setHiddenSlots((prev) => prev.filter((slotIndex) => slotIndex !== index));
-  };
-
   return (
     <DndProvider backend={HTML5Backend}>
       <div className="flex flex-col items-center space-y-4">
         {/* 显示的卡槽 */}
-        <div className="grid grid-cols-5 gap-4">
+        <div className={`gap-4 w-full grid-cols-${5-hiddenSlots.length} ${5-hiddenSlots.length > 2 ? 'grid' : 'flex'}`}>
           {slots.map((slot, index) => (
-            !hiddenSlots.includes(index) && (
-              <div key={index} className="flex flex-col items-center">
-                <button className="mb-2 font-bold" onClick={() => hideSlot(index)}>
-                  {slotLabels[index]} {/* 标签说明 */}
+              <div key={index} className={`flex flex-col items-center w-full ${hiddenSlots.includes(index) ? 'hidden' : ''}`}>
+                <button className="my-2 font-bold text-xl" onClick={() => setHiddenSlots([...hiddenSlots, index])}>
+                  {slotLabels[index]}
                 </button>
+                
                 <CardSlot
                   slotIndex={index}
                   cards={slot}
@@ -77,19 +67,21 @@ const App: React.FC = () => {
                   onReturn={handleReturn}
                 />
               </div>
-            )
           ))}
         </div>
 
         {/* 底部卡片列表 */}
         <CardList cards={cards} onReturn={handleReturn} />
-
         {/* 隐藏的卡槽标签 */}
         {hiddenSlots.length > 0 && (
           <div className="fixed bottom-0 left-0 w-full p-2">
             <div className="flex space-x-4">
               {hiddenSlots.map((slotIndex) => (
-                <button key={slotIndex} className="w-36 h-24 m-2 flex items-center justify-center text-md border text-white rounded bg-[#aee636]" onClick={() => restoreSlot(slotIndex)}>
+                <button
+                  key={slotIndex}
+                  className="w-36 h-24 m-2 flex items-center justify-center text-md border text-white rounded bg-[#aee636]"
+                  onClick={() => setHiddenSlots(hiddenSlots.filter((index) => index !== slotIndex))}
+                >
                   {slotLabels[slotIndex]}
                 </button>
               ))}
