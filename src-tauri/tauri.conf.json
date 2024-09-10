@@ -55,10 +55,10 @@
     },
     "windows": [
       {
-        "fullscreen": false,
+        "fullscreen": true,
         "height": 600,
         "resizable": true,
-        "title": "drag-card",
+        "title": "职业价值观",
         "width": 800,
         "fileDropEnabled": false
       }
