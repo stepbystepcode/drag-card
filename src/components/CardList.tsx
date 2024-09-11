@@ -13,8 +13,16 @@ const CardList: React.FC<CardListProps> = ({ cards, onReturn }) => {
   return (
     <div className="w-64 z-10 aspect-[3/2] border border-dashed flex justify-center items-center fixed bottom-0 right-0 ">
       {topCard && (
-        <Card key={topCard.id} id={topCard.id} content={topCard.content} description={topCard.description} onReturn={onReturn} />
-      ) }
+        <Card 
+          key={topCard.id} 
+          id={topCard.id} 
+          content={topCard.content} 
+          description={topCard.description} 
+          onReturn={onReturn}
+          index={0} // Add this line
+          moveCard={() => {}} // Add this line
+        />
+      )}
     </div>
   );
 };

@@ -125,4 +125,5 @@ export const data: { name: string, description: string }[] = [
             "工作时间经常很紧迫、工作质量要求严格、工作需要和严格而挑剔的同事合作",
     },
     { name: "审美", description: "工作本身能提供学习及欣赏美好事物的机会" },
+    { name: "建设性表达", description: "能通过手写或口头的方式表达自己对提升工作效率的建议，并有机会实践和改革"}
 ];
